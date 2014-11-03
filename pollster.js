@@ -41,6 +41,11 @@ function invoke(path, params, callback) {
   var url = buildRequestUrl(path);
 
   request(url, {qs: params}, function (error, response, body) {
-    callback(JSON.parse(body));
+    if (error) console.log(error);
+    if (body.length > 0) {
+      callback(JSON.parse(body));
+    } else {
+      callback(null);
+    }
   });
 }
